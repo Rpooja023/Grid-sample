@@ -1,0 +1,32 @@
+<div class="search-container">
+  <label for="searchInput">Search:</label>
+  <input type="text" id="searchInput" [(ngModel)]="searchItem" (input)="onSearch()">
+</div>
+<div class="grid-json">
+  <div class="table">
+  <div class="table-header">
+    <div class="table-cell">Name</div>
+    <div class="table-cell">Phone Number</div>
+    <div class="table-cell">Address</div>
+  </div>
+  <div class="table-body">
+    <div *ngFor="let item of getCurrentPageData()" class="table-row">
+      <div class="table-cell">{{ item.name }}</div>
+      <div class="table-cell">{{ item.number }}</div>
+      <div class="table-cell">{{ item.address }}</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="flex pagination ">
+    <label for="pageSizeSelect">Items per page:</label>
+    <select id="pageSizeSelect" [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="100">100</option>
+    </select>
+    <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span>{{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+</div>
